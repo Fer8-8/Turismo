@@ -1,0 +1,178 @@
+Analizo el orden de generación basándome en dependencias y lógica de negocio:
+
+Orden Recomendado para Generar Recursos NestJS
+FASE 1: Fundamentos Geográficos y Usuarios 
+Country (tiene datos base)
+State (YA IMPLEMENTADO)
+Address (YA IMPLEMENTADO)
+CdmUser - Usuario de e-commerce (depende de Address/Country)
+FASE 2: Catálogo Base
+TaxCategory - Categorías de impuestos (sin dependencias)
+ShippingCategory - Categorías de envío (sin dependencias)
+Taxonomy → Taxon - Sistema de categorización de productos
+OptionType → OptionValue - Opciones de productos (talla, color)
+FASE 3: Productos e Inventario
+Product - Productos base
+Variant - Variantes de productos
+Price - Precios
+StockLocation - Ubicaciones de almacén
+StockItem - Inventario disponible
+FASE 4: Envíos y Zonas
+Zone → ZoneMember - Zonas geográficas
+ShippingMethod - Métodos de envío
+ShippingRate - Tarifas de envío
+FASE 5: Pagos
+Gateway - Gateways de pago
+PaymentMethod - Métodos de pago
+FASE 6: Órdenes (Core Business)
+Order - Órdenes
+LineItem - Items de órdenes
+Payment - Pagos realizados
+Shipment - Envíos
+FASE 7: Sistema Postal (Diferenciador)
+PostalOffice - Oficinas postales
+PostalVehicle - Vehículos
+PostalGuide - Guías postales
+PostalManifest - Manifiestos
+FASE 8: Promociones y Devoluciones
+Promotion - Promociones
+ReturnAuthorization - Devoluciones
+Reimbursement - Reembolsos
+📋 PROMPT PARA NUEVA VENTANA
+
+# Contexto del Proyecto: correos_de_mexico_backend
+
+## Stack Técnico
+- **Framework**: NestJS 11.x con GraphQL (Apollo)
+- **ORM**: Prisma 7.2.0 con adapter-pg (PostgreSQL)
+- **Auth**: better-auth 1.4.17 + @thallesp/nestjs-better-auth 2.2.2
+- **Base de Datos**: PostgreSQL 17 (local Windows)
+
+## Configuración de Base de Datos
+```env
+DATABASE_URL="postgresql://root:admin123@localhost:5432/correos_de_mexicoTest?schema=public"
+
+Usuario: root (con permisos CREATEDB)
+Password: admin123
+Puerto: 5432
+psql path: C:\Program Files\PostgreSQL\17\bin\psql.exe
+Estado Actual del Proyecto
+✅ Completado
+PostgreSQL 17 corriendo localmente como servicio Windows
+Base de datos correos_de_mexicoTest creada y configurada
+Schema completo implementado: 87 tablas sincronizadas vía prisma db push
+4 tablas auth (user, session, account, verification)
+77 tablas cdm_* (e-commerce: productos, órdenes, inventario, pagos, envíos, promociones, devoluciones, taxonomías, impuestos, zonas, tiendas, créditos)
+7 tablas sistema postal (PostalOffice, PostalGuide, PostalManifest, PostalVehicle, PostalEvent, etc.)
+Prisma Client generado con todos los modelos
+Módulos NestJS funcionales:
+✅ src/address/ (resolver, service, DTOs, entity) - CRUD completo
+✅ src/state/ (resolver, service, DTOs, entity) - CRUD completo
+✅ src/prisma/ (PrismaService con PrismaPg adapter)
+✅ src/lib/auth.ts (betterAuth config con prismaAdapter)
+🔄 Pendiente
+75+ modelos sin resolvers/services/DTOs/entities
+Seed data para testing
+Generación de módulos siguiendo orden de dependencias
+
+
+Estructura de Módulos Existentes (Patrón a Seguir)
+src/address/ (Ejemplo de referencia)
+// address.entity.ts
+@ObjectType()
+export class Address {
+  @Field(() => ID)
+  id: string;
+  
+  @Field()
+  address1: string;
+  
+  @Field(() => State, { nullable: true })
+  state?: State;
+}
+
+// create-address.input.ts
+@InputType()
+export class CreateAddressInput {
+  @Field()
+  @IsString()
+  address1: string;
+  
+  @Field()
+  @IsUUID()
+  state_id: string;
+}
+
+// address.service.ts
+@Injectable()
+export class AddressService {
+  constructor(private prisma: PrismaService) {}
+  
+  create(createAddressInput: CreateAddressInput) {
+    return this.prisma.address.create({
+      data: createAddressInput,
+      include: { state: true }
+    });
+  }
+}
+
+// address.resolver.ts
+@Resolver(() => Address)
+export class AddressResolver {
+  constructor(private readonly addressService: AddressService) {}
+  
+  @Mutation(() => Address)
+  @AllowAnonymous()
+  createAddress(@Args('createAddressInput') input: CreateAddressInput) {
+    return this.addressService.create(input);
+  }
+}
+
+Orden de Generación de Recursos
+FASE 1: Fundamentos ✅
+State ✅
+Address ✅
+CdmUser ⬅️ SIGUIENTE
+FASE 2: Catálogo Base
+TaxCategory → ShippingCategory → Taxonomy → Taxon → OptionType → OptionValue
+FASE 3: Productos
+Product → Variant → Price → StockLocation → StockItem
+FASE 4: Envíos
+Zone → ShippingMethod → ShippingRate
+FASE 5: Pagos
+Gateway → PaymentMethod
+FASE 6: Órdenes (Core)
+Order → LineItem → Payment → Shipment
+FASE 7: Sistema Postal (Diferenciador)
+PostalOffice → PostalVehicle → PostalGuide → PostalManifest
+FASE 8: Avanzado
+Promotion → ReturnAuthorization → Reimbursement
+
+// Comandos Útiles
+# Generar recurso Nest
+pnpm nest g res <nombre> --no-spec
+
+# Regenerar Prisma Client
+pnpm prisma generate
+
+# Sincronizar schema con DB
+pnpm prisma db push
+
+# Conectar a PostgreSQL
+$env:PGPASSWORD='admin123'; & 'C:\Program Files\PostgreSQL\17\bin\psql.exe' -U root -d correos_de_mexicoTest
+
+# Verificar tablas
+psql -U root -d correos_de_mexicoTest -c "\dt"
+
+Consideraciones Importantes
+UUIDs: Todos los IDs son UUID v4, generados con dbgenerated("gen_random_uuid()")
+Validación: Usar @IsUUID() en todos los campos *_id en InputTypes
+Relaciones: Incluir relaciones con include: { relation: true } en servicios
+Auth: Marcar endpoints públicos con @AllowAnonymous() o implementar @Roles()
+Nombres de tablas:
+Auth: user, session, account, verification
+E-commerce: cdm_* (ej: cdm_products, cdm_orders)
+Postal: postal_* (ej: postal_offices, postal_guides)
+Ubicación del Proyecto
+Próximo Paso
+Generar módulo NestJS para CdmUser siguiendo el patrón de Address/State.

@@ -1,0 +1,5 @@
+-- AlterTable
+ALTER TABLE "cdm_address" ALTER COLUMN "state_id" DROP NOT NULL,
+ALTER COLUMN "country_id" DROP NOT NULL,
+ALTER COLUMN "user_id" DROP NOT NULL,
+ALTER COLUMN "label" DROP NOT NULL;

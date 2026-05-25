@@ -1,0 +1,14 @@
+export { CreatePromotionInput } from './create-promotion.input';
+export { UpdatePromotionInput } from './update-promotion.input';
+export { PromotionFilterInput } from './promotion-filter.input';
+export { CreatePromotionCategoryInput } from './create-promotion-category.input';
+export { UpdatePromotionCategoryInput } from './update-promotion-category.input';
+export { AssignPromotionCategoryInput } from './assign-promotion-category.input';
+export { CreatePromotionRuleInput } from './create-promotion-rule.input';
+export { UpdatePromotionRuleInput } from './update-promotion-rule.input';
+export { CreatePromotionActionInput } from './create-promotion-action.input';
+export { UpdatePromotionActionInput } from './update-promotion-action.input';
+export { ValidatePromoCodeInput } from './validate-promo-code.input';
+export { EvaluateOrderPromotionsInput, EvaluationLineInput } from './evaluate-promotions.input';
+export { AssignPromotionStoreInput } from './assign-promotion-store.input';
+export { LinkPromotionOrderInput } from './link-promotion-order.input';

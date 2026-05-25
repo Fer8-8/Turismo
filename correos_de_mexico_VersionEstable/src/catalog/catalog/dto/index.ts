@@ -1,0 +1,10 @@
+export { CreateTaxonomyInput } from './create-taxonomy.input';
+export { UpdateTaxonomyInput } from './update-taxonomy.input';
+export { CreateTaxonInput } from './create-taxon.input';
+export { UpdateTaxonInput } from './update-taxon.input';
+export { CreatePropertyInput } from './create-property.input';
+export { UpdatePropertyInput } from './update-property.input';
+export { CreateProductPropertyInput } from './create-product-property.input';
+export { UpdateProductPropertyInput } from './update-product-property.input';
+export { CreatePrototypeInput } from './create-prototype.input';
+export { UpdatePrototypeInput } from './update-prototype.input';
