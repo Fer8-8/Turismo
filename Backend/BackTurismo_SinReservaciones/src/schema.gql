@@ -1,0 +1,1202 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Category {
+  id_category: ID!
+  category: String!
+  created_at: DateTime!
+  updated_at: DateTime!
+  places: [Place!]!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type State {
+  id: ID!
+  name: String!
+  extension: String
+  population: Int
+  description: String
+  region: String!
+  created_at: DateTime!
+  updated_at: DateTime!
+  places: [Place!]
+}
+
+type PlaceAttribute {
+  id: ID!
+  place_id: ID
+  municipality: String!
+  is_pueblo_magico: Boolean!
+  is_unesco_heritage: Boolean!
+  is_protected_area: Boolean!
+  price_level: PriceLevel!
+  estimated_daily_cost_min: Float
+  estimated_daily_cost_max: Float
+  accommodation_avg_cost: Int!
+  food_avg_cost: Int!
+  best_seasons: JSON!
+  avoid_seasons: JSON!
+  ideal_months: JSON!
+  typical_visit_hours: Float
+  recommended_days: Int
+  has_vegan_options: Boolean!
+  has_vegetarian_options: Boolean!
+  has_gluten_free: Boolean!
+  cuisine_types: JSON!
+  culinary_speciality: String
+  has_nightlife: Boolean!
+  wheelchair_accessible: Boolean!
+  has_parking: Boolean!
+  pet_friendly: Boolean!
+  environment_type: EnvironmentType!
+  development_level: DevelopmentLevel!
+  crowd_level: CrowdLevel!
+  beach_type: BeachType!
+  sand_color: String!
+  wave_type: WaveType!
+  has_reef: Boolean!
+  avg_temp_summer_celsius: Float!
+  avg_temp_winter_celsius: Float!
+  requires_guide: Boolean!
+  requires_permit: Boolean!
+  verified: Boolean
+  verified_at: DateTime
+  created_at: DateTime
+  updated_at: DateTime
+  Place: Place
+}
+
+"""Niveles de precio disponibles para los lugares"""
+enum PriceLevel {
+  low
+  medium
+  high
+}
+
+"""
+The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSON
+
+"""Tipos de ambiente disponibles para los lugares"""
+enum EnvironmentType {
+  natural
+  urban
+  mixed
+  rural
+  na
+}
+
+"""Niveles de desarrollo disponibles para los lugares"""
+enum DevelopmentLevel {
+  virgin
+  minimum
+  moderate
+  high
+  commercial
+  na
+}
+
+"""Niveles de multitud disponibles para los lugares"""
+enum CrowdLevel {
+  solitary
+  tranquil
+  moderate
+  crowded
+  very_crowded
+  na
+}
+
+"""Tipos de playa disponibles para los lugares"""
+enum BeachType {
+  virgin
+  semi_virgin
+  developed
+  urban
+  na
+}
+
+"""Tipos de olas disponibles para los lugares"""
+enum WaveType {
+  calm
+  moderate
+  strong
+  na
+}
+
+type Tag {
+  id: ID!
+  tag_name: String!
+  tag_category: TagCategory!
+  created_at: DateTime
+  updated_at: DateTime
+}
+
+"""Categorías disponibles para los tags"""
+enum TagCategory {
+  activity
+  type
+  environment
+  characteristics
+  public
+}
+
+type PlaceTag {
+  id: ID!
+  place_id: ID
+  tag_id: ID
+  relevance_score: Float!
+  Place: Place
+  Tag: Tag
+}
+
+type Event {
+  id: ID!
+  name: String!
+  start_date: DateTime!
+  end_date: DateTime!
+  id_state: ID
+  state: State
+  details: JSON!
+  contactDetails_id: ID
+  isTradition: Boolean!
+  languages_details: JSON!
+  created_at: DateTime!
+  updated_at: DateTime!
+  medias: [Media!]
+  id_category: ID
+  category: Category
+}
+
+type Payment {
+  id: ID!
+  card_number_hashed: String!
+  expiry_date_hashed: String!
+  cvc_hashed: String!
+  name_card: String!
+  surname_card: String!
+  cardtype: String!
+  last_4: String
+  user_id: ID!
+  user: User!
+  created_at: DateTime!
+  updated_at: DateTime!
+}
+
+type Language {
+  id: String!
+  name: String!
+  abbr: String!
+  users: [User!]
+  created_at: DateTime!
+  updated_at: DateTime!
+}
+
+type Currency {
+  id: ID!
+  name: String!
+  abbr: String!
+  created_at: DateTime!
+  updated_at: DateTime!
+  users: [User!]
+}
+
+type Userfeaturescache {
+  id: ID!
+  user_id: ID
+  total_interactions: Int
+  total_favorites: Int
+  total_views: Int
+  total_booking: Int
+  top_categories: JSON!
+  top_states: JSON!
+  top_activities: JSON!
+  avg_price_level_interacted: String!
+  avg_daily_cost_preference: Int!
+  avg_session_duration_seconds: Int!
+  favorite_ratio: Float!
+  booking_conversation_ratio: Float!
+  adventure_level_score: Float!
+  cultural_interest_score: Float!
+  beach_preference_score: Float!
+  nightlife_interest_score: Float!
+  last_interaction_at: DateTime!
+  created_at: DateTime!
+  updated_at: DateTime!
+  User: User
+}
+
+type User {
+  id: ID!
+  name: String!
+  email: String!
+  image: String
+  role: Role
+  managedStateId: String
+  emailVerified: Boolean
+  payments: [Payment!]
+  id_language: ID
+  languages: Language
+  id_currency: ID
+  currencies: Currency
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  userFeaturesCache: Userfeaturescache
+}
+
+enum Role {
+  admin
+  adminState
+  partner
+  user
+}
+
+type PlaceActivity {
+  id: ID!
+  place_id: ID
+  activity_name: String!
+  difficulty_level: DifficultyLevel!
+  min_age: Int!
+  requires_equipment: Boolean!
+  additional_cost: Float!
+  available_months: JSON!
+  created_at: DateTime!
+  updated_at: DateTime!
+  Place: Place
+  media: [Media!]
+}
+
+"""Niveles de dificultad disponibles para las actividades"""
+enum DifficultyLevel {
+  easy
+  medium
+  hard
+}
+
+type Media {
+  id: ID!
+  url: String!
+  mime_type: String!
+  alt_text: String!
+  isCover: Boolean!
+  event_id: String
+  place_id: String
+  review_id: String
+  user_id: String
+  metadata: JSON
+  size: Float
+  status: MediaStatus!
+  stream_url: String
+  miniature_url: String
+  created_at: DateTime!
+  updated_at: DateTime!
+  place_activities_id: String
+  place_activities: PlaceActivity
+  event: Event
+  place: Place
+  user: User
+}
+
+"""Status of the media upload"""
+enum MediaStatus {
+  PENDING
+  READY
+  FAILED
+}
+
+type Place {
+  id: ID!
+  name: String!
+  description: String
+  address: String
+  latitude: Float
+  longitude: Float
+  id_category: ID
+  details: JSON
+  contactDetails_id: ID
+  languages_details: JSON
+  state_id: ID
+  state: State
+  category: Category
+  created_at: DateTime
+  updated_at: DateTime
+  placeAttributes: PlaceAttribute
+  placeTags: [PlaceTag!]
+  medias: [Media!]
+
+  """Distance in kilometers (only nerby method)"""
+  distance: Float
+  city_id: ID
+  city: Place
+  places: [Place!]
+}
+
+type Info {
+  count: Int!
+  pages: Int!
+  next: Int
+  prev: Int
+}
+
+type PlacesResponse {
+  info: Info!
+  places: [Place!]!
+}
+
+type AuthResponse {
+  user: User!
+  token: String!
+}
+
+type Planner {
+  id: ID!
+  name: String!
+  start_date: DateTime!
+  end_date: DateTime!
+  people: Int!
+  budget: Float!
+  state_id: String
+  state: State
+  user_id: String
+  user: User
+  status: routes_status!
+  created_at: DateTime!
+  updated_at: DateTime!
+}
+
+"""Estados posibles para una ruta en el planner"""
+enum routes_status {
+  confirmed
+  in_progress
+  completed
+}
+
+type PlannerResponse {
+  info: Info!
+  planners: [Planner!]!
+}
+
+type EventsResponse {
+  info: Info!
+  events: [Event!]!
+}
+
+type MediaResponse {
+  info: Info!
+  media: [Media!]!
+}
+
+type UserfeaturescacheResponse {
+  info: Info!
+  userfeaturescaches: [Userfeaturescache!]!
+}
+
+type Contact_detail {
+  id: ID
+  email: String
+  phone_number: String
+  social_media: JSON
+  created_at: DateTime
+  updated_at: DateTime
+}
+
+type PlaceActivitiesResponse {
+  info: Info!
+  placeActivities: [PlaceActivity!]!
+}
+
+type RecommendationLog {
+  id: ID!
+  user_id: ID
+  session_id: ID
+  request_context: JSON!
+  algorithm_version: String!
+  model_version: String!
+  recommended_places: JSON!
+  places_clicked: JSON!
+  places_favorited: JSON!
+  time_to_first_click_seconds: Int!
+  total_engagement_score: Float!
+  created_at: DateTime!
+  User: User
+}
+
+type RecommendationLogsResponse {
+  info: Info!
+  recommendationLogs: [RecommendationLog!]!
+}
+
+type UserSession {
+  id: ID!
+  user_id: ID
+  device_type: device_types!
+  device_os: String!
+  browser: String!
+  ip_address: String!
+  city: String!
+  state: String!
+  country: String!
+  started_at: DateTime!
+  ended_at: DateTime!
+  duration_seconds: Int!
+  page_views: Int!
+  had_interaction: Boolean!
+  had_favorite: Boolean!
+  user: User
+  RecommendationLogs: [RecommendationLog!]
+}
+
+enum device_types {
+  mobile
+  desktop
+}
+
+type UserSessionResponse {
+  info: Info!
+  user_sessions: [UserSession!]!
+}
+
+type ActivitiesPlanner {
+  id: ID!
+  day: DateTime
+  id_planner: String
+  planner: Planner
+  places: [Place!]
+}
+
+type ActivitiesPlannerResponse {
+  info: Info!
+  activities_planners: [ActivitiesPlanner!]!
+}
+
+type PlaceDraft {
+  name: String!
+  description: String!
+  address: String!
+  latitude: Float!
+  longitude: Float!
+  id_category: ID
+  details: JSON
+  contactDetails_id: ID
+  languages_details: JSON
+  state_id: ID
+}
+
+type ChangeElement {
+  """Name of the field changed"""
+  field: String!
+  old_value: JSON
+  new_value: JSON
+}
+
+type RequestHistoryEntry {
+  """Update date"""
+  changed_at: DateTime!
+
+  """Changes made in update"""
+  changes: [ChangeElement!]!
+}
+
+type PlaceRequest {
+  id: ID!
+
+  """Request Status"""
+  status: request_status!
+  id_user: ID!
+  user: User!
+
+  """Info of the place requested to create"""
+  place_json: PlaceDraft!
+
+  """History of changes made to the request"""
+  history_json: [RequestHistoryEntry!]
+  id_place: ID
+  place: Place
+  created_at: DateTime!
+  updated_at: DateTime!
+}
+
+enum request_status {
+  pending
+  approved
+  rejected
+}
+
+type PlaceRequestResponse {
+  info: Info!
+  place_requests: [PlaceRequest!]!
+}
+
+type Placefeaturecache {
+  id: ID!
+  place_id: String
+  total_interactions: Int!
+  total_favorites: Int!
+  total_views: Int!
+  total_bookings: Int!
+  total_reviews: Int!
+  avg_overral_rating: Float!
+  avg_value_rating: Float!
+  rating_count: Int!
+  views_last_7_days: Int!
+  views_last_30_days: Int!
+  trending_score: Float!
+  avg_visitor_age_rate: String!
+  primary_travel_party_type: TravelPartyType!
+  updated_at: DateTime!
+  created_at: DateTime!
+  Place: Place
+}
+
+"""Tipos de grupos de viaje disponibles para los lugares"""
+enum TravelPartyType {
+  solo
+  couple
+  family
+  friends
+  business
+}
+
+type Favorite {
+  id: ID!
+  id_user: String
+  created_at: DateTime!
+  updated_at: DateTime!
+  place: [Place!]
+  event: [Event!]
+}
+
+type FavoritesResponse {
+  info: Info!
+  favorites: [Favorite!]!
+}
+
+type Query {
+  getHello: String!
+  places(id_category: [String!] = [], state_id: [String!] = [], name: String, mime_type: [String!] = [], isCover: [Boolean!] = [], current: Int = 1, regions: [ValidRegions!] = [], limit: Int, isRandom: Boolean, seed: Int): PlacesResponse!
+  place(id: String!): Place!
+  nearbyPlaces(
+    """The latitude coordinate in decimal degrees (e.g., 19.4326)"""
+    latitude: Float!
+
+    """The longitude coordinate in decimal degrees (e.g., -99.1332)"""
+    longitude: Float!
+    current: Int = 1
+    id_category: [String!] = []
+    state_id: [String!] = []
+    name: String
+    mime_type: [String!] = []
+    isCover: [Boolean!] = []
+    limit: Int
+  ): PlacesResponse!
+  cities(state_id: String): [Place!]!
+  states(regions: [ValidRegions!] = [], name: [String!] = []): [State!]!
+  state(id: ID!): State!
+  categories: [Category!]!
+  category(id_category: ID!): Category!
+  users: [User!]!
+  user(id: ID!): User!
+  me: User
+  payments: [Payment!]!
+  payment(id: String!): Payment!
+  paymentsByUser: [Payment!]!
+  planners(status: PlannerStatus, current: Int = 1): PlannerResponse!
+  planner(id: String!): Planner!
+  events(id_state: [String!] = [], id_category: [String!] = [], start_date: DateTime, end_date: DateTime, is_active: Boolean, mime_type: [String!] = [], isCover: [Boolean!] = [], current: Int = 1, limit: Int): EventsResponse!
+  event(id: String!): Event!
+  languages: [Language!]!
+  language(id: String!): Language!
+  allMedia(event_id: [String!] = [], place_id: [String!] = [], user_id: [String!] = [], mime_type: [String!] = [], isCover: [Boolean!] = [], current: Int = 1, isRandom: Boolean, seed: Int): MediaResponse!
+  media(id: String!): Media!
+  currencies: [Currency!]!
+  currency(id: String!): Currency!
+  tags: [Tag!]!
+  tag(id: ID!): Tag!
+  userfeaturescaches(current: Int = 1): UserfeaturescacheResponse!
+  userfeaturescache(id: ID!): Userfeaturescache
+  userfeaturescacheByUser(userId: ID!): Userfeaturescache
+  userSessions(user_ids: [ID!] = [], device_types: [device_types!] = [], current: Int = 1): UserSessionResponse!
+  userSession(id: ID!): UserSession!
+  placeAttributes: [PlaceAttribute!]!
+  placeAttribute(id: ID!): PlaceAttribute!
+  placeActivities(current: Int = 1, mime_type: [String!] = [], isCover: [Boolean!] = []): PlaceActivitiesResponse!
+  placeActivity(id: ID!): PlaceActivity!
+  placeActivitiesByPlaceId(placeId: ID!, current: Int = 1, mime_type: [String!] = [], isCover: [Boolean!] = []): PlaceActivitiesResponse!
+  placeTags: [PlaceTag!]!
+  placeTag(id: ID!): PlaceTag!
+  recommendationLogs(current: Int = 1): RecommendationLogsResponse!
+  recommendationLog(id: ID!): RecommendationLog!
+  getContactDetails(limit: Int, offset: Int, search: String): [Contact_detail!]!
+  contactDetail(id: ID!): Contact_detail
+  activitiesPlanner(activities_ids: [ID!] = [], current: Int = 1): ActivitiesPlannerResponse!
+  activityPlanner(id: ID!): ActivitiesPlanner!
+  placeRequests(current: Int = 1, state_ids: [ID!], status: request_status): PlaceRequestResponse!
+  placeRequest(id: ID!): PlaceRequest!
+  allplacefeaturecache(categoryId: String, stateId: String, page: Int = 1, limit: Int = 10): [Placefeaturecache!]!
+  placefeaturecache(id: ID!): Placefeaturecache!
+  favorites(current: Int = 1): FavoritesResponse!
+  favorite(id: String!): Favorite!
+}
+
+enum ValidRegions {
+  Norte
+  Centro
+  Pacifico
+  Bajio
+  Caribe
+}
+
+"""Estados posibles para una ruta en el planner"""
+enum PlannerStatus {
+  confirmed
+  in_progress
+  completed
+}
+
+type Mutation {
+  createPlace(createPlaceInput: CreatePlaceInput!): Place!
+  updatePlace(updatePlaceInput: UpdatePlaceInput!): Place!
+  removePlace(id: String!): Place!
+  createState(createStateInput: CreateStateInput!): State!
+  updateState(updateStateInput: UpdateStateInput!): State!
+  createCategory(createCategoryInput: CreateCategoryInput!): Category!
+  updateCategory(updateCategoryInput: UpdateCategoryInput!): Category!
+  removeCategory(id_category: ID!): Category!
+  createUser(createUserInput: CreateUserInput!): User!
+  updateUser(updateUserInput: UpdateUserInput!): User!
+  removeUser(id: ID!): User!
+  register(registerUserInput: RegisterUserInput!): AuthResponse!
+  login(loginUserInput: LoginUserInput!): AuthResponse!
+  loginAnonymously: AuthResponse!
+  createPayment(createPaymentInput: CreatePaymentInput!): Payment!
+  updatePayment(updatePaymentInput: UpdatePaymentInput!): Payment!
+  removePayment(id: String!): Payment!
+  createPlanner(createPlannerInput: CreatePlannerInput!): Planner!
+  updatePlanner(updatePlannerInput: UpdatePlannerInput!): Planner!
+  createEvent(createEventInput: CreateEventInput!): Event!
+  updateEvent(updateEventInput: UpdateEventInput!): Event!
+  removeEvent(id: String!): Event!
+  createLanguage(createLanguageInput: CreateLanguageInput!): Language!
+  updateLanguage(updateLanguageInput: UpdateLanguageInput!): Language!
+  removeLanguage(id: String!): Language!
+  updateMedia(updateMediaInput: UpdateMediaInput!): Media!
+  createCurrency(createCurrencyInput: CreateCurrencyInput!): Currency!
+  updateCurrency(updateCurrencyInput: UpdateCurrencyInput!): Currency!
+  createTag(createTagInput: CreateTagInput!): Tag!
+  updateTag(updateTagInput: UpdateTagInput!): Tag!
+  createUserfeaturescache(createUserfeaturescacheInput: CreateUserfeaturescacheInput!): Userfeaturescache!
+
+  """create a new user session"""
+  createUserSession(createUserSessionInput: CreateUserSessionInput!): UserSession!
+  updateUserSession(updateUserSessionInput: UpdateUserSessionInput!): UserSession!
+  createPlaceAttribute(createPlaceAttributeInput: CreatePlaceAttributeInput!): PlaceAttribute!
+  updatePlaceAttribute(updatePlaceAttributeInput: UpdatePlaceAttributeInput!): PlaceAttribute!
+  createPlaceActivity(createPlaceActivityInput: CreatePlaceActivityInput!): PlaceActivity!
+  updatePlaceActivity(updatePlaceActivityInput: UpdatePlaceActivityInput!): PlaceActivity!
+  removePlaceActivity(id: ID!): PlaceActivity!
+  createPlaceTag(createPlaceTagInput: CreatePlaceTagInput!): PlaceTag!
+  updatePlaceTag(updatePlaceTagInput: UpdatePlaceTagInput!): PlaceTag!
+  removePlaceTag(id: ID!): PlaceTag!
+  createRecommendationLog(createRecommendationLogInput: CreateRecommendationLogInput!): RecommendationLog!
+  createContact(createCategoryInput: CreateContactInput!): Contact_detail!
+  createActivitiesPlanner(createActivitiesPlannerInput: CreateActivitiesPlannerInput!): ActivitiesPlanner!
+  updateActivitiesPlanner(updateActivitiesPlannerInput: UpdateActivitiesPlannerInput!): ActivitiesPlanner!
+  createPlaceRequest(createPlaceRequestInput: CreatePlaceRequestInput!): PlaceRequest!
+  updatePlaceRequest(updatePlaceRequestInput: UpdatePlaceRequestInput!): PlaceRequest!
+  removePlaceRequest(id: ID!): PlaceRequest!
+  reviewPlaceRequest(id: ID!, status: request_status!): PlaceRequest!
+  createPlacefeaturecache(createPlacefeaturecacheInput: CreatePlacefeaturecacheInput!): Placefeaturecache!
+  updatePlacefeaturecache(updatePlacefeaturecacheInput: UpdatePlacefeaturecacheInput!): Placefeaturecache!
+  createFavorite(createFavoriteInput: CreateFavoriteInput!): Favorite!
+  removeFavorite(id: String!): Favorite!
+}
+
+input CreatePlaceInput {
+  name: String!
+  description: String
+  address: String
+  latitude: Float
+  longitude: Float
+  state_id: ID
+  id_category: ID
+  details: JSON
+  contactDetails_id: ID
+  languages_details: JSON
+  city_id: ID
+}
+
+input UpdatePlaceInput {
+  name: String
+  description: String
+  address: String
+  latitude: Float
+  longitude: Float
+  state_id: ID
+  id_category: ID
+  details: JSON
+  contactDetails_id: ID
+  languages_details: JSON
+  city_id: ID
+  id: ID!
+}
+
+input CreateStateInput {
+  name: String!
+  extension: String
+  population: Int
+  description: String
+  region: String!
+  created_at: DateTime = "2026-04-13T19:07:00.339Z"
+  updated_at: DateTime = "2026-04-13T19:07:00.339Z"
+}
+
+input UpdateStateInput {
+  name: String
+  extension: String
+  population: Int
+  description: String
+  region: String
+  created_at: DateTime = "2026-04-13T19:07:00.339Z"
+  updated_at: DateTime = "2026-04-13T19:07:00.339Z"
+  id: ID!
+}
+
+input CreateCategoryInput {
+  category: String!
+}
+
+input UpdateCategoryInput {
+  category: String
+  id_category: ID!
+}
+
+input CreateUserInput {
+  name: String!
+  email: String!
+  password: String
+  image: String
+  role: Role
+  managedStateId: String
+  id_language: ID
+  id_currency: ID
+}
+
+input UpdateUserInput {
+  name: String
+  email: String
+  password: String
+  image: String
+  role: Role
+  managedStateId: String
+  id_language: ID
+  id_currency: ID
+  id: ID!
+}
+
+input RegisterUserInput {
+  name: String!
+  email: String!
+  password: String!
+  image: String
+}
+
+input LoginUserInput {
+  email: String!
+  password: String!
+}
+
+input CreatePaymentInput {
+  card_number_hashed: String!
+  expiry_date_hashed: String!
+  cvc_hashed: String!
+  name_card: String!
+  surname_card: String!
+  cardtype: String!
+  last_4: String
+  user_id: ID
+}
+
+input UpdatePaymentInput {
+  card_number_hashed: String
+  expiry_date_hashed: String
+  cvc_hashed: String
+  name_card: String
+  surname_card: String
+  cardtype: String
+  last_4: String
+  user_id: ID
+  id: ID!
+}
+
+input CreatePlannerInput {
+  name: String!
+  start_date: DateTime!
+  end_date: DateTime!
+  people: Int!
+  budget: Float!
+  state_id: String
+  user_id: String
+  status: routes_status!
+}
+
+input UpdatePlannerInput {
+  name: String
+  start_date: DateTime
+  end_date: DateTime
+  people: Int
+  budget: Float
+  state_id: String
+  user_id: String
+  status: routes_status
+  id: String!
+}
+
+input CreateEventInput {
+  name: String!
+  start_date: DateTime!
+  end_date: DateTime!
+  id_state: ID
+  details: JSON!
+  contactDetails_id: ID
+  isTradition: Boolean!
+  languages_details: JSON!
+  id_category: ID
+}
+
+input UpdateEventInput {
+  name: String
+  start_date: DateTime
+  end_date: DateTime
+  id_state: ID
+  details: JSON
+  contactDetails_id: ID
+  isTradition: Boolean
+  languages_details: JSON
+  id_category: ID
+  id: ID!
+}
+
+input CreateLanguageInput {
+  name: String!
+  abbr: String!
+}
+
+input UpdateLanguageInput {
+  name: String
+  abbr: String
+  id: String!
+}
+
+input UpdateMediaInput {
+  url: String
+  mime_type: String
+  alt_text: String
+  isCover: Boolean
+  event_id: String
+  place_id: String
+  place_activities_id: String
+  review_id: String
+  user_id: String
+  metadata: JSON
+  stream_url: String
+  miniature_url: String
+  id: String!
+  status: MediaStatus
+}
+
+input CreateCurrencyInput {
+  name: String!
+  abbr: String!
+}
+
+input UpdateCurrencyInput {
+  name: String
+  abbr: String
+  id: String!
+}
+
+input CreateTagInput {
+  tag_name: String!
+  tag_category: TagCategory!
+}
+
+input UpdateTagInput {
+  tag_name: String
+  tag_category: TagCategory
+  id: String!
+}
+
+input CreateUserfeaturescacheInput {
+  user_id: ID!
+  total_interactions: Int = 0
+  total_favorites: Int = 0
+  total_views: Int = 0
+  total_booking: Int = 0
+  top_categories: JSON!
+  top_states: JSON!
+  top_activities: JSON!
+  avg_price_level_interacted: String!
+  avg_daily_cost_preference: Int!
+  avg_session_duration_seconds: Int!
+  favorite_ratio: Float!
+  booking_conversation_ratio: Float!
+  adventure_level_score: Float!
+  cultural_interest_score: Float!
+  beach_preference_score: Float!
+  nightlife_interest_score: Float!
+  last_interaction_at: DateTime!
+}
+
+input CreateUserSessionInput {
+  user_id: ID
+
+  """Device session type (mobile | desktop)"""
+  device_type: device_types!
+  device_os: String!
+  browser: String!
+  ip_address: String!
+  city: String!
+  state: String!
+  country: String!
+  started_at: DateTime!
+  ended_at: DateTime!
+  duration_seconds: Int!
+  page_views: Int!
+  had_interaction: Boolean!
+  had_favorite: Boolean!
+}
+
+input UpdateUserSessionInput {
+  user_id: ID
+
+  """Device session type (mobile | desktop)"""
+  device_type: device_types
+  device_os: String
+  browser: String
+  ip_address: String
+  city: String
+  state: String
+  country: String
+  started_at: DateTime
+  ended_at: DateTime
+  duration_seconds: Int
+  page_views: Int
+  had_interaction: Boolean
+  had_favorite: Boolean
+  id: ID!
+}
+
+input CreatePlaceAttributeInput {
+  place_id: ID
+  municipality: String!
+  is_pueblo_magico: Boolean!
+  is_unesco_heritage: Boolean!
+  is_protected_area: Boolean!
+  price_level: PriceLevel!
+  estimated_daily_cost_min: Float!
+  estimated_daily_cost_max: Float!
+  accommodation_avg_cost: Int!
+  food_avg_cost: Int!
+  best_seasons: JSON!
+  avoid_seasons: JSON!
+  ideal_months: JSON!
+  typical_visit_hours: Float!
+  recommended_days: Int!
+  has_vegan_options: Boolean!
+  has_vegetarian_options: Boolean!
+  has_gluten_free: Boolean!
+  cuisine_types: JSON!
+  culinary_speciality: String!
+  has_nightlife: Boolean!
+  wheelchair_accessible: Boolean!
+  has_parking: Boolean!
+  pet_friendly: Boolean!
+  environment_type: EnvironmentType!
+  development_level: DevelopmentLevel!
+  crowd_level: CrowdLevel!
+  beach_type: BeachType!
+  sand_color: String!
+  wave_type: WaveType!
+  has_reef: Boolean!
+  avg_temp_summer_celsius: Float!
+  avg_temp_winter_celsius: Float!
+  requires_guide: Boolean!
+  requires_permit: Boolean!
+  verified: Boolean
+  verified_at: DateTime
+}
+
+input UpdatePlaceAttributeInput {
+  place_id: ID
+  municipality: String
+  is_pueblo_magico: Boolean
+  is_unesco_heritage: Boolean
+  is_protected_area: Boolean
+  price_level: PriceLevel
+  estimated_daily_cost_min: Float
+  estimated_daily_cost_max: Float
+  accommodation_avg_cost: Int
+  food_avg_cost: Int
+  best_seasons: JSON
+  avoid_seasons: JSON
+  ideal_months: JSON
+  typical_visit_hours: Float
+  recommended_days: Int
+  has_vegan_options: Boolean
+  has_vegetarian_options: Boolean
+  has_gluten_free: Boolean
+  cuisine_types: JSON
+  culinary_speciality: String
+  has_nightlife: Boolean
+  wheelchair_accessible: Boolean
+  has_parking: Boolean
+  pet_friendly: Boolean
+  environment_type: EnvironmentType
+  development_level: DevelopmentLevel
+  crowd_level: CrowdLevel
+  beach_type: BeachType
+  sand_color: String
+  wave_type: WaveType
+  has_reef: Boolean
+  avg_temp_summer_celsius: Float
+  avg_temp_winter_celsius: Float
+  requires_guide: Boolean
+  requires_permit: Boolean
+  verified: Boolean
+  verified_at: DateTime
+  id: ID!
+}
+
+input CreatePlaceActivityInput {
+  place_id: ID
+  activity_name: String!
+  difficulty_level: DifficultyLevel!
+  min_age: Int!
+  requires_equipment: Boolean!
+  additional_cost: Float!
+  available_months: JSON!
+}
+
+input UpdatePlaceActivityInput {
+  place_id: ID
+  activity_name: String
+  difficulty_level: DifficultyLevel
+  min_age: Int
+  requires_equipment: Boolean
+  additional_cost: Float
+  available_months: JSON
+  id: ID!
+}
+
+input CreatePlaceTagInput {
+  place_id: ID!
+  tag_id: ID!
+  relevance_score: Float!
+}
+
+input UpdatePlaceTagInput {
+  place_id: ID
+  tag_id: ID
+  relevance_score: Float
+  id: ID!
+}
+
+input CreateRecommendationLogInput {
+  user_id: ID
+  session_id: ID
+  request_context: JSON!
+  algorithm_version: String!
+  model_version: String!
+  recommended_places: JSON!
+  places_clicked: JSON!
+  places_favorited: JSON!
+  time_to_first_click_seconds: Int!
+  total_engagement_score: Float!
+}
+
+input CreateContactInput {
+  email: String!
+  phone_number: String
+  social_media: JSON
+}
+
+input CreateActivitiesPlannerInput {
+  day: DateTime!
+  id_planner: ID
+  id_places: [ID!]
+}
+
+input UpdateActivitiesPlannerInput {
+  day: DateTime
+  id_planner: ID
+  id_places: [ID!]
+  id: ID!
+}
+
+input CreatePlaceRequestInput {
+  status: request_status! = pending
+
+  """If left blank, it will automatically use the authenticated user's ID"""
+  id_user: ID
+
+  """Info of the place requested to create"""
+  place_json: CreatePlaceInput!
+  id_place: ID
+}
+
+input UpdatePlaceRequestInput {
+  status: request_status = pending
+
+  """If left blank, it will automatically use the authenticated user's ID"""
+  id_user: ID
+
+  """Partial info of the place to modify"""
+  place_json: JSON
+  id_place: ID
+  id: ID!
+}
+
+input CreatePlacefeaturecacheInput {
+  place_id: String
+  total_interactions: Int!
+  total_favorites: Int!
+  total_views: Int!
+  total_bookings: Int!
+  total_reviews: Int!
+  avg_overral_rating: Float!
+  avg_value_rating: Float!
+  rating_count: Int!
+  views_last_7_days: Int!
+  views_last_30_days: Int!
+  trending_score: Float!
+  avg_visitor_age_rate: String!
+  primary_travel_party_type: TravelPartyType!
+}
+
+input UpdatePlacefeaturecacheInput {
+  place_id: String
+  total_interactions: Int
+  total_favorites: Int
+  total_views: Int
+  total_bookings: Int
+  total_reviews: Int
+  avg_overral_rating: Float
+  avg_value_rating: Float
+  rating_count: Int
+  views_last_7_days: Int
+  views_last_30_days: Int
+  trending_score: Float
+  avg_visitor_age_rate: String
+  primary_travel_party_type: TravelPartyType
+  id: ID!
+}
+
+input CreateFavoriteInput {
+  place_id: ID
+  event_id: ID
+}

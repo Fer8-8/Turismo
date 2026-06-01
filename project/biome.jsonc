@@ -1,0 +1,27 @@
+{
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+  "extends": ["ultracite/biome/core", "ultracite/biome/react"],
+  "linter": {
+    "rules": {
+      "style": {
+        "useConsistentTypeDefinitions": {
+          "level": "error",
+          "options": {
+            "style": "type"
+          }
+        }
+      }
+    }
+  },
+  "files": {
+    "includes": [
+      "app/**/*.{ts,tsx}",
+      "features/**/*.{ts,tsx}",
+      "lib/**/*.{ts,tsx}",
+      "hooks/**/*.{ts,tsx}",
+      "components/**/*.{ts,tsx}",
+      "navigation/**/*.{ts,tsx}",
+      "store/**/*.{ts,tsx}"
+    ]
+  }
+}

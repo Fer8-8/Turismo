@@ -1,0 +1,383 @@
+import type { ImageStyle } from "react-native";
+import { SPACING } from "@/lib/theme";
+
+type StampState = {
+  title: string;
+  subtitle: string;
+  icon: string;
+  color: string;
+  iconStyle?: ImageStyle;
+};
+
+export const STAMP_STATES: Record<string, StampState> = {
+  aguascalientes: {
+    title: "Aguascalientes",
+    subtitle: "4 pueblos",
+    icon: require("@/assets/images/stamp-icon/aguascalientes-icon.png"),
+    color: "#C0392B",
+    iconStyle: {
+      right: SPACING.sm,
+      bottom: SPACING.sm,
+      width: "65%",
+      height: "75%",
+    },
+  },
+  bajaCalifornia: {
+    title: "Baja California",
+    subtitle: "1 pueblos",
+    icon: require("@/assets/images/stamp-icon/baja-california-icon.png"),
+    color: "#2E6DA4",
+    iconStyle: {
+      right: SPACING.sm,
+      bottom: SPACING.sm,
+      width: "65%",
+      height: "75%",
+    },
+  },
+  bajaCaliforniaSur: {
+    title: "Baja California Sur",
+    subtitle: "3 pueblos",
+    icon: require("@/assets/images/stamp-icon/baja-california-sur-icon.png"),
+    color: "#1A8A6E",
+    iconStyle: {
+      right: SPACING.sm,
+      bottom: SPACING.sm,
+      width: "85%",
+      height: "75%",
+    },
+  },
+  campeche: {
+    title: "Campeche",
+    subtitle: "3 pueblos",
+    icon: require("@/assets/images/stamp-icon/campeche-icon.png"),
+    color: "#B5651D",
+    iconStyle: {
+      right: SPACING.sm,
+      bottom: SPACING.sm,
+      width: "45%",
+      height: "75%",
+    },
+  },
+  chiapas: {
+    title: "Chiapas",
+    subtitle: "6 pueblos",
+    icon: require("@/assets/images/stamp-icon/chiapas-icon.png"),
+    color: "#2D7A3A",
+    iconStyle: {
+      right: SPACING.sm,
+      bottom: SPACING.sm,
+      width: "65%",
+      height: "75%",
+    },
+  },
+  chihuahua: {
+    title: "Chihuahua",
+    subtitle: "5 pueblos",
+    icon: require("@/assets/images/stamp-icon/chihuahua-icon.png"),
+    color: "#8B5E3C",
+    iconStyle: {
+      right: SPACING.sm,
+      bottom: SPACING.sm,
+      width: "65%",
+      height: "75%",
+    },
+  },
+  coahuila: {
+    title: "Coahuila",
+    subtitle: "8 pueblos",
+    icon: require("@/assets/images/stamp-icon/coahuila-icon.png"),
+    color: "#5A7FA0",
+    iconStyle: {
+      right: SPACING.sm,
+      bottom: SPACING.sm,
+      width: "85%",
+      height: "85%",
+    },
+  },
+  colima: {
+    title: "Colima",
+    subtitle: "1 pueblos",
+    icon: require("@/assets/images/stamp-icon/colima-icon.png"),
+    color: "#B8431A",
+    iconStyle: {
+      right: SPACING.sm,
+      bottom: SPACING.sm,
+      width: "75%",
+      height: "75%",
+    },
+  },
+  durango: {
+    title: "Durango",
+    subtitle: "2 pueblos",
+    icon: require("@/assets/images/stamp-icon/durango-icon.png"),
+    color: "#4A6741",
+    iconStyle: {
+      right: SPACING.sm,
+      top: SPACING["4xl"],
+      width: "100%",
+      height: "85%",
+    },
+  },
+  estadoDeMexico: {
+    title: "Estado de México",
+    subtitle: "12 pueblos",
+    icon: require("@/assets/images/stamp-icon/estado-de-mexico-icon.png"),
+    color: "#3D6B8A",
+    iconStyle: {
+      right: SPACING.xl,
+      top: SPACING["4xl"],
+      width: "85%",
+      height: "85%",
+    },
+  },
+  guanajuato: {
+    title: "Guanajuato",
+    subtitle: "6 pueblos",
+    icon: require("@/assets/images/stamp-icon/guanajuato-icon.png"),
+    color: "#B5470A",
+    iconStyle: {
+      right: SPACING.sm,
+      bottom: SPACING.sm,
+      width: "65%",
+      height: "85%",
+    },
+  },
+  guerrero: {
+    title: "Guerrero",
+    subtitle: "3 pueblos",
+    icon: require("@/assets/images/stamp-icon/guerrero-icon.png"),
+    color: "#1B7A5E",
+    iconStyle: {
+      right: SPACING.xs,
+      bottom: SPACING.sm,
+      width: "75%",
+      height: "85%",
+    },
+  },
+  hidalgo: {
+    title: "Hidalgo",
+    subtitle: "9 pueblos",
+    icon: require("@/assets/images/stamp-icon/hidalgo-icon.png"),
+    color: "#7A4E8C",
+    iconStyle: {
+      right: SPACING.sm,
+      bottom: SPACING.sm,
+      width: "65%",
+      height: "75%",
+    },
+  },
+  jalisco: {
+    title: "Jalisco",
+    subtitle: "12 pueblos",
+    icon: require("@/assets/images/stamp-icon/jalisco-icon.png"),
+    color: "#9B3A2A",
+    iconStyle: {
+      right: SPACING.sm,
+      bottom: SPACING.sm,
+      width: "65%",
+      height: "75%",
+    },
+  },
+  michoacan: {
+    title: "Michoacán",
+    subtitle: "10 pueblos",
+    icon: require("@/assets/images/stamp-icon/michoacan-icon.png"),
+    color: "#2C6B4A",
+    iconStyle: {
+      right: SPACING.sm,
+      top: SPACING["4xl"],
+      width: "75%",
+      height: "85%",
+    },
+  },
+  morelos: {
+    title: "Morelos",
+    subtitle: "4 pueblos",
+    icon: require("@/assets/images/stamp-icon/morelos-icon.png"),
+    color: "#C4772A",
+    iconStyle: {
+      right: SPACING.sm,
+      bottom: SPACING.sm,
+      width: "65%",
+      height: "75%",
+    },
+  },
+  nayarit: {
+    title: "Nayarit",
+    subtitle: "9 pueblos",
+    icon: require("@/assets/images/stamp-icon/nayarit-icon.png"),
+    color: "#1E7E8C",
+    iconStyle: {
+      right: SPACING.sm,
+      bottom: SPACING.sm,
+      width: "55%",
+      height: "75%",
+    },
+  },
+  nuevoLeon: {
+    title: "Nuevo León",
+    subtitle: "5 pueblos",
+    icon: require("@/assets/images/stamp-icon/nuevo-leon-icon.png"),
+    color: "#3D5A7A",
+    iconStyle: {
+      right: SPACING.sm,
+      bottom: SPACING.sm,
+      width: "100%",
+      height: "65%",
+    },
+  },
+  oaxaca: {
+    title: "Oaxaca",
+    subtitle: "6 pueblos",
+    icon: require("@/assets/images/stamp-icon/oaxaca-icon.png"),
+    color: "#9B5A1E",
+    iconStyle: {
+      right: SPACING.sm,
+      bottom: SPACING.sm,
+      width: "65%",
+      height: "75%",
+    },
+  },
+  puebla: {
+    title: "Puebla",
+    subtitle: "12 pueblos",
+    icon: require("@/assets/images/stamp-icon/puebla-icon.png"),
+    color: "#5A2D82",
+    iconStyle: {
+      right: SPACING.sm,
+      bottom: SPACING.sm,
+      width: "65%",
+      height: "75%",
+    },
+  },
+  queretaro: {
+    title: "Querétaro",
+    subtitle: "7 pueblos",
+    icon: require("@/assets/images/stamp-icon/queretaro-icon.png"),
+    color: "#1A7A9E",
+    iconStyle: {
+      right: SPACING.sm,
+      bottom: SPACING.sm,
+    },
+  },
+  quintanaRoo: {
+    title: "Quintana Roo",
+    subtitle: "4 pueblos",
+    icon: require("@/assets/images/stamp-icon/quintana-roo-icon.png"),
+    color: "#C44E1A",
+    iconStyle: {
+      right: SPACING.sm,
+      bottom: SPACING.sm,
+      width: "55%",
+      height: "75%",
+    },
+  },
+  sanLuisPotosi: {
+    title: "San Luis Potosí",
+    subtitle: "6 pueblos",
+    icon: require("@/assets/images/stamp-icon/san-luis-icon.png"),
+    color: "#6B4A8A",
+    iconStyle: {
+      right: SPACING.sm,
+      bottom: SPACING.sm,
+      width: "100%",
+      height: "65%",
+    },
+  },
+  sinaloa: {
+    title: "Sinaloa",
+    subtitle: "5 pueblos",
+    icon: require("@/assets/images/stamp-icon/sinaloa-icon.png"),
+    color: "#C49A1A",
+    iconStyle: {
+      right: SPACING.sm,
+      bottom: SPACING.sm,
+      width: "45%",
+      height: "75%",
+    },
+  },
+  sonora: {
+    title: "Sonora",
+    subtitle: "4 pueblos",
+    icon: require("@/assets/images/stamp-icon/sonora-icon.png"),
+    color: "#A0522D",
+    iconStyle: {
+      right: SPACING.sm,
+      bottom: SPACING.sm,
+      width: "75%",
+      height: "75%",
+    },
+  },
+  tabasco: {
+    title: "Tabasco",
+    subtitle: "3 pueblos",
+    icon: require("@/assets/images/stamp-icon/tabasco-icon.png"),
+    color: "#2E7A3A",
+    iconStyle: {
+      right: 0,
+      bottom: SPACING.sm,
+      width: "65%",
+      height: "75%",
+    },
+  },
+  tamaulipas: {
+    title: "Tamaulipas",
+    subtitle: "2 pueblos",
+    icon: require("@/assets/images/stamp-icon/tamaulipas-icon.png"),
+    color: "#2C5F8A",
+    iconStyle: {
+      right: SPACING.sm,
+      bottom: SPACING.sm,
+      width: "75%",
+      height: "65%",
+    },
+  },
+  tlaxcala: {
+    title: "Tlaxcala",
+    subtitle: "3 pueblos",
+    icon: require("@/assets/images/stamp-icon/tlaxcala-icon.png"),
+    color: "#8C3A4A",
+    iconStyle: {
+      right: SPACING.sm,
+      bottom: SPACING.sm,
+      width: "55%",
+      height: "75%",
+    },
+  },
+  veracruz: {
+    title: "Veracruz",
+    subtitle: "8 pueblos",
+    icon: require("@/assets/images/stamp-icon/veracruz-icon.png"),
+    color: "#C4572A",
+    iconStyle: {
+      right: SPACING.sm,
+      bottom: SPACING.sm,
+      width: "45%",
+      height: "85%",
+    },
+  },
+  yucatan: {
+    title: "Yucatán",
+    subtitle: "7 pueblos",
+    icon: require("@/assets/images/stamp-icon/yucatan-icon.png"),
+    color: "#E8A31A",
+    iconStyle: {
+      right: SPACING.sm,
+      bottom: SPACING.sm,
+      width: "75%",
+      height: "75%",
+    },
+  },
+  zacatecas: {
+    title: "Zacatecas",
+    subtitle: "7 pueblos",
+    icon: require("@/assets/images/stamp-icon/zacatecas-icon.png"),
+    color: "#7A3A6B",
+    iconStyle: {
+      right: SPACING.sm,
+      bottom: SPACING.sm,
+      width: "55%",
+      height: "75%",
+    },
+  },
+};

@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "media" ALTER COLUMN "size" DROP NOT NULL,
+ALTER COLUMN "size" SET DEFAULT '0';

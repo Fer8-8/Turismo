@@ -1,0 +1,695 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Payment {
+  id                 String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  card_number_hashed String
+  expiry_date_hashed String
+  cvc_hashed         String
+  name_card          String
+  surname_card       String
+  cardtype           String
+  last_4             String
+  user_id            String?
+  created_at         DateTime @default(now())
+  updated_at         DateTime @updatedAt
+  user               User?    @relation(fields: [user_id], references: [id])
+
+  @@map("payments")
+}
+
+model Preferences {
+  id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  preferences Json
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+  id_user     String?  @unique
+  user        User?    @relation(fields: [id_user], references: [id])
+
+  @@map("preferences")
+}
+
+model Categories {
+  id_category String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  category    String
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+  places      Places[]
+  events      Events[]
+
+  @@map("categories")
+}
+
+model Places {
+  id                String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name              String
+  description       String?
+  address           String?
+  latitude          Decimal? @db.Decimal
+  longitude         Decimal? @db.Decimal
+  id_category       String?  @db.Uuid
+  details           Json?
+  created_at        DateTime @default(now())
+  updated_at        DateTime @updatedAt
+  contactDetails_id String?  @db.Uuid
+  languages_details Json?
+  state_id          String?  @db.Uuid
+  city_id           String?  @db.Uuid
+  city              Places?  @relation("PlaceToCity", fields: [city_id], references: [id])
+  places            Places[] @relation("PlaceToCity")
+
+  medias             media[]
+  placeActivities    PlaceActivities[]
+  placeAttributes    PlaceAttributes?
+  placeFeaturesCache PlaceFeaturesCache?
+  placeReviewDetails PlaceReviewDetails[]
+  placeTags          PlaceTags[]
+  contactDetails     Contact_details?     @relation(fields: [contactDetails_id], references: [id])
+  category           Categories?          @relation(fields: [id_category], references: [id_category])
+  state              States?              @relation(fields: [state_id], references: [id])
+  reviews            Reviews[]
+  userInteractions   UserInteractions[]
+  activitiesPlanners Activities_planner[] @relation("Activities_plannerToPlaces")
+  favorites          Favorites[]          @relation("FavoritesToPlaces")
+  requests           PlaceRequest[]
+
+  @@index([latitude])
+  @@index([longitude])
+  @@map("places")
+}
+
+model Reviews {
+  id            String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  description   String
+  rate          String
+  date_of_visit DateTime
+  id_user       String?
+  id_place      String?  @db.Uuid
+  id_event      String?  @db.Uuid
+  id_state      String?  @db.Uuid
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
+  medias        media[]
+  event         Events?  @relation(fields: [id_event], references: [id])
+  place         Places?  @relation(fields: [id_place], references: [id])
+  state         States?  @relation(fields: [id_state], references: [id])
+  user          User?    @relation(fields: [id_user], references: [id])
+
+  @@map("reviews")
+}
+
+model States {
+  id          String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name        String
+  extension   String?
+  population  Int?
+  description String?   @default("")
+  created_at  DateTime  @default(now())
+  updated_at  DateTime  @updatedAt
+  region      regions
+  events      Events[]
+  places      Places[]
+  planners    Planner[]
+  reviews     Reviews[]
+  users       User[]
+
+  @@unique([name])
+  @@map("states")
+}
+
+model Planner {
+  id                 String               @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name               String
+  start_date         DateTime
+  end_date           DateTime
+  people             Int
+  budget             Float
+  state_id           String?              @db.Uuid
+  created_at         DateTime             @default(now())
+  updated_at         DateTime             @updatedAt
+  status             routes_status
+  user_id            String?
+  activitiesPlanners Activities_planner[]
+  state              States?              @relation(fields: [state_id], references: [id])
+  user               User?                @relation(fields: [user_id], references: [id])
+
+  @@map("planner")
+}
+
+model Activities_planner {
+  id                         String                       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  day                        DateTime
+  created_at                 DateTime                     @default(now())
+  updated_at                 DateTime                     @updatedAt
+  id_planner                 String?                      @db.Uuid
+  Activities_plannerToEvents Activities_plannerToEvents[]
+  planner                    Planner?                     @relation(fields: [id_planner], references: [id])
+  places                     Places[]                     @relation("Activities_plannerToPlaces")
+
+  @@map("activities_planner")
+}
+
+model Contact_details {
+  id           String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  email        String
+  phone_number String
+  created_at   DateTime @default(now())
+  updated_at   DateTime @updatedAt
+  social_media Json
+  events       Events[]
+  places       Places[]
+
+  @@map("contact_details")
+}
+
+model Currencies {
+  id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name       String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  abbr       String
+  users      User[]
+
+  @@map("currencies")
+}
+
+model Languages {
+  id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name       String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  abbr       String
+  users      User[]
+
+  @@map("languages")
+}
+
+model Favorites {
+  id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  id_user    String?
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  user       User?    @relation(fields: [id_user], references: [id])
+  event      Events[] @relation("EventsToFavorites")
+  place      Places[] @relation("FavoritesToPlaces")
+}
+
+model Events {
+  id                         String                       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name                       String
+  start_date                 DateTime
+  end_date                   DateTime
+  id_state                   String?                      @db.Uuid
+  details                    Json
+  contactDetails_id          String?                      @db.Uuid
+  isTradition                Boolean
+  languages_details          Json
+  id_category                String?                      @db.Uuid
+  category                   Categories?                  @relation(fields: [id_category], references: [id_category])
+  created_at                 DateTime                     @default(now())
+  updated_at                 DateTime                     @updatedAt
+  contactDetails             Contact_details?             @relation(fields: [contactDetails_id], references: [id])
+  state                      States?                      @relation(fields: [id_state], references: [id])
+  Activities_plannerToEvents Activities_plannerToEvents[]
+  medias                     media[]
+  reviews                    Reviews[]
+  favorites                  Favorites[]                  @relation("EventsToFavorites")
+}
+
+model media {
+  id                  String           @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  url                 String
+  mime_type           String
+  alt_text            String
+  isCover             Boolean
+  event_id            String?          @db.Uuid
+  place_id            String?          @db.Uuid
+  review_id           String?          @db.Uuid
+  user_id             String?
+  place_activities_id String?          @db.Uuid
+  metadata            Json?
+  stream_url          String?
+  miniature_url       String?
+  size                Float?           @default(0)
+  created_at          DateTime         @default(now())
+  updated_at          DateTime         @updatedAt
+  status              MediaStatus      @default(PENDING)
+  event               Events?          @relation(fields: [event_id], references: [id])
+  place               Places?          @relation(fields: [place_id], references: [id])
+  review              Reviews?         @relation(fields: [review_id], references: [id])
+  user                User?            @relation(fields: [user_id], references: [id])
+  place_activities    PlaceActivities? @relation(fields: [place_activities_id], references: [id])
+}
+
+model User {
+  id                 String               @id
+  name               String
+  email              String               @unique
+  emailVerified      Boolean              @default(false)
+  image              String?
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
+  managedStateId     String?              @db.Uuid
+  banned             Boolean?             @default(false)
+  banReason          String?
+  banExpires         DateTime?
+  id_currency        String?              @db.Uuid
+  id_language        String?              @db.Uuid
+  role               Role?                @default(user)
+  isAnonymous        Boolean?
+  favorites          Favorites[]
+  recommendationLogs RecommendationLogs[]
+  accounts           Account[]
+  medias             media[]
+  payments           Payment[]
+  placeReviewDetails PlaceReviewDetails[]
+  planners           Planner[]
+  preferences        Preferences?
+  reviews            Reviews[]
+  sessions           Session[]
+  currencies         Currencies?          @relation(fields: [id_currency], references: [id])
+  languages          Languages?           @relation(fields: [id_language], references: [id])
+  managedState       States?              @relation(fields: [managedStateId], references: [id])
+  userFeaturesCache  UserFeaturesCache?
+  userInteractions   UserInteractions[]
+  userSessions       UserSession[]
+  requests           PlaceRequest[]
+
+  @@map("user")
+}
+
+model PlaceRequest {
+  id           String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  status       request_status @default(pending)
+  id_user      String
+  place_json   Json
+  history_json Json?          @default("[]")
+  id_place     String?        @db.Uuid
+  created_at   DateTime       @default(now())
+  updated_at   DateTime       @updatedAt
+  user         User           @relation(fields: [id_user], references: [id])
+  place        Places?        @relation(fields: [id_place], references: [id])
+
+  @@map("place_request")
+}
+
+model Session {
+  id             String   @id
+  expiresAt      DateTime
+  token          String   @unique
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  ipAddress      String?
+  userAgent      String?
+  userId         String?
+  impersonatedBy String?
+  user           User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("session")
+}
+
+model Account {
+  id                    String    @id
+  accountId             String
+  providerId            String
+  userId                String?
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+  user                  User?     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("account")
+}
+
+model Verification {
+  id         String   @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([identifier])
+  @@map("verification")
+}
+
+model Activities_plannerToEvents {
+  A                  String             @db.Uuid
+  B                  String             @db.Uuid
+  activities_planner Activities_planner @relation(fields: [A], references: [id], onDelete: Cascade)
+  Events             Events             @relation(fields: [B], references: [id], onDelete: Cascade)
+
+  @@id([A, B], map: "_Activities_plannerToEvents_AB_pkey")
+  @@index([B], map: "_Activities_plannerToEvents_B_index")
+  @@map("_Activities_plannerToEvents")
+}
+
+model UserInteractions {
+  id                       String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  user_id                  String?
+  place_id                 String?           @db.Uuid
+  interaction_type         interaction_types
+  interaction_weight       Decimal           @db.Decimal
+  device_type              device_types
+  source                   String
+  time_spent_seconds       Int
+  scroll_depth             Decimal
+  position_in_list         Int
+  recommendation_algorithm String
+  created_at               DateTime          @default(now())
+  session_id               String            @db.Uuid
+  Place                    Places?           @relation(fields: [place_id], references: [id], onDelete: Cascade)
+  UserSession              UserSession       @relation(fields: [session_id], references: [id], onDelete: Cascade)
+  User                     User?             @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@map("user_interactions")
+}
+
+model PlaceAttributes {
+  id                       String             @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  place_id                 String?            @unique @db.Uuid
+  municipality             String
+  is_pueblo_magico         Boolean            @default(false)
+  is_unesco_heritage       Boolean            @default(false)
+  is_protected_area        Boolean            @default(false)
+  price_level              price_levels
+  estimated_daily_cost_min Decimal?           @db.Decimal
+  estimated_daily_cost_max Decimal?           @db.Decimal
+  accommodation_avg_cost   Int
+  food_avg_cost            Int
+  best_seasons             Json
+  avoid_seasons            Json
+  ideal_months             Json
+  typical_visit_hours      Decimal?           @db.Decimal
+  recommended_days         Int?
+  has_vegan_options        Boolean            @default(false)
+  has_vegetarian_options   Boolean            @default(false)
+  has_gluten_free          Boolean            @default(false)
+  cuisine_types            Json
+  culinary_speciality      String?
+  has_nightlife            Boolean            @default(false)
+  wheelchair_accessible    Boolean            @default(false)
+  has_parking              Boolean            @default(false)
+  pet_friendly             Boolean            @default(false)
+  environment_type         environment_types
+  development_level        development_levels
+  crowd_level              crowd_levels
+  beach_type               beach_types
+  sand_color               String
+  wave_type                wave_types
+  has_reef                 Boolean            @default(false)
+  avg_temp_summer_celsius  Decimal            @db.Decimal
+  avg_temp_winter_celsius  Decimal            @db.Decimal
+  requires_guide           Boolean            @default(false)
+  requires_permit          Boolean            @default(false)
+  verified                 Boolean            @default(false)
+  verified_at              DateTime?
+  created_at               DateTime           @default(now())
+  updated_at               DateTime           @updatedAt
+  Place                    Places?            @relation(fields: [place_id], references: [id], onDelete: Cascade)
+
+  @@map("place_attributes")
+}
+
+model PlaceActivities {
+  id                 String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  place_id           String?           @db.Uuid
+  activity_name      String
+  difficulty_level   difficulty_levels
+  min_age            Int
+  requires_equipment Boolean           @default(false)
+  additional_cost    Decimal           @db.Decimal
+  available_months   Json
+  media              media[]
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  Place      Places?  @relation(fields: [place_id], references: [id], onDelete: Cascade)
+
+  @@map("place_activities")
+}
+
+model Tags {
+  id           String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  tag_name     String         @unique
+  tag_category tag_categories
+  created_at   DateTime       @default(now())
+  updated_at   DateTime       @updatedAt
+  PlaceTags    PlaceTags[]
+
+  @@map("tags")
+}
+
+model PlaceTags {
+  id              String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  place_id        String? @db.Uuid
+  relevance_score Decimal @db.Decimal
+  tag_id          String? @db.Uuid
+  Place           Places? @relation(fields: [place_id], references: [id], onDelete: Cascade)
+  Tag             Tags?   @relation(fields: [tag_id], references: [id], onDelete: Cascade)
+
+  @@map("place_tags")
+}
+
+model PlaceReviewDetails {
+  id                 String             @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  user_id            String?
+  place_id           String?            @db.Uuid
+  overral_rating     Int
+  value_rating       Decimal            @db.Decimal
+  cleanliness_rating Decimal            @db.Decimal
+  activities_rating  Decimal            @db.Decimal
+  foot_rating        Decimal            @db.Decimal
+  review_title       String
+  review_text        String
+  visit_date         DateTime
+  travel_party_type  travel_party_types
+  created_at         DateTime           @default(now())
+  updated_at         DateTime           @updatedAt
+  Place              Places?            @relation(fields: [place_id], references: [id], onDelete: Cascade)
+  User               User?              @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@map("place_review_details")
+}
+
+model UserFeaturesCache {
+  id                           String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  user_id                      String?  @unique
+  total_interactions           Int      @default(0)
+  total_favorites              Int      @default(0)
+  total_views                  Int      @default(0)
+  total_booking                Int      @default(0)
+  top_states                   Json
+  top_activities               Json
+  avg_price_level_interacted   String
+  avg_daily_cost_preference    Int
+  avg_session_duration_seconds Int
+  favorite_ratio               Decimal  @db.Decimal
+  booking_conversation_ratio   Decimal  @db.Decimal
+  adventure_level_score        Decimal  @db.Decimal
+  cultural_interest_score      Decimal  @db.Decimal
+  beach_preference_score       Decimal  @db.Decimal
+  nightlife_interest_score     Decimal  @db.Decimal
+  last_interaction_at          DateTime
+  created_at                   DateTime @default(now())
+  updated_at                   DateTime @updatedAt
+  top_categories               Json
+  User                         User?    @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@map("user_features_cache")
+}
+
+model PlaceFeaturesCache {
+  id                        String             @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  place_id                  String?            @unique @db.Uuid
+  total_interactions        Int                @default(0)
+  total_favorites           Int                @default(0)
+  total_views               Int                @default(0)
+  total_bookings            Int                @default(0)
+  total_reviews             Int                @default(0)
+  avg_overral_rating        Decimal            @db.Decimal
+  avg_value_rating          Decimal            @db.Decimal
+  rating_count              Int                @default(0)
+  views_last_7_days         Int                @default(0)
+  views_last_30_days        Int                @default(0)
+  trending_score            Decimal            @db.Decimal
+  avg_visitor_age_rate      String
+  primary_travel_party_type travel_party_types
+  updated_at                DateTime           @updatedAt
+  created_at                DateTime           @default(now())
+  Place                     Places?            @relation(fields: [place_id], references: [id], onDelete: Cascade)
+
+  @@map("place_features_cache")
+}
+
+model UserSession {
+  id                 String               @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  user_id            String?
+  device_type        device_types
+  device_os          String
+  browser            String
+  ip_address         String
+  city               String
+  state              String
+  country            String
+  started_at         DateTime
+  ended_at           DateTime
+  duration_seconds   Int
+  page_views         Int
+  had_interaction    Boolean              @default(false)
+  had_favorite       Boolean              @default(false)
+  RecommendationLogs RecommendationLogs[]
+  UserInteractions   UserInteractions[]
+  User               User?                @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@map("user_session")
+}
+
+model RecommendationLogs {
+  id                          String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  user_id                     String?
+  session_id                  String?      @db.Uuid
+  request_context             Json
+  algorithm_version           String
+  model_version               String
+  recommended_places          Json
+  places_clicked              Json
+  places_favorited            Json
+  time_to_first_click_seconds Int
+  total_engagement_score      Decimal      @db.Decimal
+  created_at                  DateTime     @default(now())
+  UserSession                 UserSession? @relation(fields: [session_id], references: [id], onDelete: Cascade)
+  User                        User?        @relation(fields: [user_id], references: [id], onDelete: Cascade)
+}
+
+enum request_status {
+  pending
+  approved
+  rejected
+}
+
+enum Role {
+  admin
+  adminState
+  partner
+  user
+}
+
+enum travel_party_types {
+  solo
+  couple
+  family
+  friends
+  business
+}
+
+enum tag_categories {
+  activity
+  type
+  environment
+  characteristics
+  public
+}
+
+enum difficulty_levels {
+  easy
+  medium
+  hard
+}
+
+enum beach_types {
+  virgin
+  semi_virgin
+  developed
+  urban
+  na
+}
+
+enum wave_types {
+  calm
+  moderate
+  strong
+  na
+}
+
+enum crowd_levels {
+  solitary
+  tranquil
+  moderate
+  crowded
+  very_crowded
+  na
+}
+
+enum development_levels {
+  virgin
+  minimum
+  moderate
+  high
+  commercial
+  na
+}
+
+enum environment_types {
+  natural
+  urban
+  mixed
+  rural
+  na
+}
+
+enum price_levels {
+  low
+  medium
+  high
+}
+
+enum device_types {
+  mobile
+  desktop
+}
+
+enum interaction_types {
+  view
+  click
+  favorite
+  unfavorite
+  share
+  save
+  book
+  review
+  search_result_click
+}
+
+enum regions {
+  Norte
+  Centro
+  Pacifico
+  Bajio
+  Caribe
+}
+
+enum routes_status {
+  confirmed
+  in_progress
+  completed
+}
+
+enum MediaStatus {
+  PENDING
+  READY
+  FAILED
+}

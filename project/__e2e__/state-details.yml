@@ -1,0 +1,26 @@
+appId: "com.seanalytics.exploremexico.dev"
+name: "State details"
+description: "Search for a state and it should display the state information"
+---
+- launchApp
+- assertVisible:
+    id: "search-bar-link"
+- tapOn:
+    id: "search-bar-link"
+- tapOn:
+    id: "search-input"
+- inputText: "lo"
+- assertVisible:
+    id: "search-result-magical-town-Morelos"
+- assertVisible:
+    id: "search-result-magical-town-Sinaloa"
+- tapOn:
+    id: "clear-search-input"
+- inputText: "agu"
+- assertVisible:
+    id: "search-result-magical-town-Aguascalientes"
+- hideKeyboard
+- tapOn:
+    id: "search-result-magical-town-Aguascalientes"
+- assertVisible:
+    id: "state-title-Aguascalientes"

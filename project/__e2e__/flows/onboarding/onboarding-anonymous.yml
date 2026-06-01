@@ -1,0 +1,25 @@
+appId: "com.seanalytics.exploremexico.dev"
+name: "Onboarding anonymous"
+description: "Do the onboarding flow and sign in anonymously to access the app without an account"
+---
+- assertVisible: "Explore México"
+- tapOn:
+    id: "startButton"
+- tapOn:
+    id: "esButton"
+- assertVisible: "Idioma"
+- assertVisible: "Seleccione el idioma de la aplicación"
+- tapOn:
+    id: "nextButton"
+- tapOn:
+    id: "nextButton"
+- tapOn:
+    id: "signInAnonymousButton"
+- assertVisible:
+    id: "home-tab-button"
+- assertVisible:
+    id: "explore-tab-button"
+- assertVisible:
+    id: "itinerary-tab-button"
+- assertVisible:
+    id: "options-tab-button"

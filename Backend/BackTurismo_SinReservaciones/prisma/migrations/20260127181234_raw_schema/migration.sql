@@ -1,0 +1,4 @@
+-- AlterTable
+ALTER TABLE "places" ALTER COLUMN "details" DROP NOT NULL,
+ALTER COLUMN "created_at" SET DEFAULT CURRENT_TIMESTAMP,
+ALTER COLUMN "languages_details" DROP NOT NULL;

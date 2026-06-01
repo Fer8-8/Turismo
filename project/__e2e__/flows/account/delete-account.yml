@@ -1,0 +1,14 @@
+appId: "com.seanalytics.exploremexico.dev"
+name: "Delete account"
+description: "Do the onboarding flow and sign in anonymously then delete the account"
+---
+- tapOn:
+    id: "options-tab-button"
+- tapOn:
+    id: "options-item-settings"
+- tapOn:
+    id: "settings-delete-account"
+- assertVisible: "¿Estás seguro?"
+- tapOn:
+    id: "settings-confirm-delete-account"
+- assertVisible: "Explore México"

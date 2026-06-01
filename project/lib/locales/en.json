@@ -1,0 +1,191 @@
+{
+  "home": {
+    "header": {
+      "location": "Location"
+    },
+    "search": "Search for a destination",
+    "categories": {
+      "home": "For you",
+      "world": "World cup",
+      "magicalTowns": "Magical Towns",
+      "culture": "Culture",
+      "food": "Gastronomy",
+      "nature": "Nature",
+      "cities": "Cities"
+    },
+    "results": {
+      "allPlaces": "Recommended for me",
+      "byCategory": "Results",
+      "byState": "Results",
+      "byDistance": "Near me",
+      "cities": "Cities"
+    }
+  },
+  "options": {
+    "links": {
+      "favorites": "Favorites",
+      "settings": "Settings",
+      "help": "Help"
+    },
+    "settings": {
+      "title": "Settings",
+      "actions": {
+        "changeLanguage": "Change language",
+        "deleteData": "Delete my data",
+        "deleteAccount": "Delete account"
+      },
+      "deleteConfirmation": {
+        "title": "Are you sure?",
+        "descriptionData": "By deleting your data, your favorites, preferences and other information from the app will be permanently deleted.",
+        "descriptionAccount": "By deleting your account, your favorites, preferences and other information from the app will be permanently deleted.",
+        "irreversible": "This action cannot be undone.",
+        "cancel": "Cancel",
+        "confirm": "Delete Data"
+      },
+      "language": {
+        "title": "Language",
+        "subtitle": "Select the application language",
+        "options": {
+          "en": "English",
+          "es": "Spanish",
+          "fr": "French"
+        }
+      }
+    }
+  },
+  "common": {
+    "next": "Next"
+  },
+  "onboarding": {
+    "welcome": {
+      "title": "Explore México",
+      "description": "Start by telling us what kind of México you'd like to discover",
+      "start": "Get started",
+      "alreadyHaveAccount": "I already have an account",
+      "legend": "By using Explore México, you agree to our",
+      "termsOfUse": "Terms of use",
+      "and": "and our",
+      "privacyPolicy": "Privacy policy"
+    },
+    "tastes": {
+      "title": "Tell us what you like",
+      "subtitle": "Select your preferences so we can give you better recommendations",
+      "vibe": {
+        "label": "Vibe",
+        "beach": "Beach",
+        "mountain": "Mountain",
+        "city": "City",
+        "magicalTown": "Magical Town",
+        "jungle": "Jungle",
+        "desert": "Desert"
+      },
+      "activities": {
+        "label": "Activities",
+        "gastronomy": "Gastronomy",
+        "nightlife": "Nightlife",
+        "adventure": "Adventure",
+        "culture": "Culture",
+        "relax": "Relax",
+        "shopping": "Shopping"
+      },
+      "tripType": {
+        "label": "Trip type",
+        "solo": "Solo",
+        "couple": "Couple",
+        "friends": "With friends",
+        "family": "With family",
+        "work": "Work"
+      }
+    },
+    "signUp": {
+      "title": "Account",
+      "subtitle": "Create your account and enjoy the best experience possible",
+      "continueWithApple": "Continue with Apple",
+      "continueWithGoogle": "Continue with Google",
+      "continueWithoutAccount": "Continue without account"
+    }
+  },
+  "planDetails": {
+    "title": "Destinations",
+    "day": "Day {number}",
+    "card": {
+      "title": "Historic center of Oaxaca",
+      "description": "Explore the historic center of Oaxaca",
+      "category": "culture"
+    },
+    "card2": {
+      "title": "Crafts market",
+      "description": "Discover local crafts",
+      "category": "shopping"
+    },
+    "card3": {
+      "title": "Santo Domingo Temple",
+      "description": "Visit the historic temple",
+      "category": "history"
+    },
+    "card4": {
+      "title": "Local gastronomy",
+      "description": "Try typical moles",
+      "category": "gastronomy"
+    },
+    "card5": {
+      "title": "Monte Albán",
+      "description": "Archaeological site",
+      "category": "archaeology"
+    }
+  },
+  "recommendations": {
+    "title": "Places we recommend",
+    "valle": {
+      "title": "Valle de Bravo",
+      "cards": {
+        "v1": {
+          "title": "Bridal Veil Waterfall",
+          "category": "Nature"
+        },
+        "v2": {
+          "title": "Los Pericos Restaurant",
+          "category": "Food"
+        },
+        "v3": {
+          "title": "La Peña viewpoint",
+          "category": "Nature"
+        }
+      }
+    },
+    "toluca": {
+      "title": "Toluca",
+      "cards": {
+        "t1": {
+          "title": "Blue House",
+          "category": "Culture"
+        },
+        "t2": {
+          "title": "Church of Carmen",
+          "category": "Culture"
+        },
+        "t3": {
+          "title": "The Cosmovitral",
+          "category": "Nature"
+        },
+        "t4": {
+          "title": "The Northerner",
+          "category": "Food"
+        }
+      }
+    },
+    "teotihuacan": {
+      "title": "San Juan Teotihuacan",
+      "cards": {
+        "sj1": {
+          "title": "Teotihuacan",
+          "category": "Culture"
+        },
+        "sj2": {
+          "title": "Mictlan Restaurante",
+          "category": "Food"
+        }
+      }
+    }
+  }
+}

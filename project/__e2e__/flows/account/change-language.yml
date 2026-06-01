@@ -1,0 +1,18 @@
+appId: "com.seanalytics.exploremexico.dev"
+---
+- clearState
+- launchApp
+- tapOn:
+    id: "options-tab-button"
+- tapOn:
+    id: "options-item-settings"
+- tapOn:
+    id: "settings-change-language"
+- tapOn:
+    id: "language-selector-fr"
+- assertVisible: "Langue"
+- assertVisible: "Anglais"
+- assertVisible: "Espagnol"
+- tapOn:
+    id: "detached-modal-header-close"
+- assertVisible: "Configuration"

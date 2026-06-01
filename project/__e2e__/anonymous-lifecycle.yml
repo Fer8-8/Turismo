@@ -1,0 +1,8 @@
+appId: "com.seanalytics.exploremexico.dev"
+name: "Anonymous lifecycle"
+description: "Do the onboarding flow and sign in anonymously to access the app without an account and then delete the account"
+---
+- launchApp:
+    clearKeychain: true
+- runFlow: ./flows/onboarding/onboarding-anonymous.yml
+- runFlow: ./flows/account/delete-account.yml

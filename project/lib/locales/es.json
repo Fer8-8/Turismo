@@ -1,0 +1,191 @@
+{
+  "home": {
+    "header": {
+      "location": "Ubicación"
+    },
+    "search": "Buscar un destino",
+    "categories": {
+      "home": "Para ti",
+      "world": "Mundial",
+      "magicalTowns": "Pueblos Mágicos",
+      "culture": "Cultura",
+      "food": "Gastronomía",
+      "nature": "Naturaleza",
+      "cities": "Ciudades"
+    },
+    "results": {
+      "allPlaces": "Recomendados para mí",
+      "byCategory": "Resultados",
+      "byState": "Resultados",
+      "byDistance": "Cerca de mí",
+      "cities": "Ciudades"
+    }
+  },
+  "options": {
+    "links": {
+      "favorites": "Favoritos",
+      "settings": "Configuración",
+      "help": "Ayuda"
+    },
+    "settings": {
+      "title": "Configuración",
+      "actions": {
+        "changeLanguage": "Cambiar idioma",
+        "deleteData": "Eliminar mis datos",
+        "deleteAccount": "Eliminar cuenta"
+      },
+      "deleteConfirmation": {
+        "title": "¿Estás seguro?",
+        "descriptionData": "Al eliminar tus datos, se borrarán permanentemente tus favoritos, preferencias y otra información de la app.",
+        "descriptionAccount": "Al eliminar tu cuenta, se borrarán permanentemente tus favoritos, preferencias y otra información de la app.",
+        "irreversible": "Esta acción no se puede deshacer.",
+        "cancel": "Cancelar",
+        "confirm": "Eliminar Datos"
+      },
+      "language": {
+        "title": "Idioma",
+        "subtitle": "Seleccione el idioma de la aplicación",
+        "options": {
+          "en": "Inglés",
+          "es": "Español",
+          "fr": "Francés"
+        }
+      }
+    }
+  },
+  "common": {
+    "next": "Siguiente"
+  },
+  "onboarding": {
+    "welcome": {
+      "title": "Explore México",
+      "description": "Empieza contándonos qué tipo de México te gustaría descubrir",
+      "start": "Comenzar",
+      "alreadyHaveAccount": "Ya tengo una cuenta",
+      "legend": "Al usar Explore México, aceptas nuestros",
+      "termsOfUse": "Términos de uso",
+      "and": "y nuestra",
+      "privacyPolicy": "Política de privacidad"
+    },
+    "tastes": {
+      "title": "Cuéntanos qué te gusta",
+      "subtitle": "Selecciona tus preferencias para poder darte mejores recomendaciones",
+      "vibe": {
+        "label": "Ambiente",
+        "beach": "Playa",
+        "mountain": "Montaña",
+        "city": "Ciudad",
+        "magicalTown": "Pueblo mágico",
+        "jungle": "Selva",
+        "desert": "Desierto"
+      },
+      "activities": {
+        "label": "Actividades",
+        "gastronomy": "Gastronomía",
+        "nightlife": "Vida nocturna",
+        "adventure": "Aventura",
+        "culture": "Cultura",
+        "relax": "Relax",
+        "shopping": "Compras"
+      },
+      "tripType": {
+        "label": "Tipo de viaje",
+        "solo": "Solo",
+        "couple": "En pareja",
+        "friends": "Con amigos",
+        "family": "En familia",
+        "work": "Trabajo"
+      }
+    },
+    "signUp": {
+      "title": "Cuenta",
+      "subtitle": "Crea tu cuenta y disfruta de la mejor experiencia posible",
+      "continueWithApple": "Continuar con Apple",
+      "continueWithGoogle": "Continuar con Google",
+      "continueWithoutAccount": "Continuar sin cuenta"
+    }
+  },
+  "planDetails": {
+    "title": "Destinos",
+    "day": "Día {number}",
+    "card": {
+      "title": "Centro histórico de Oaxaca",
+      "description": "Explora el centro histórico de Oaxaca",
+      "category": "cultura"
+    },
+    "card2": {
+      "title": "Mercado de artesanías",
+      "description": "Descubre artesanías locales",
+      "category": "compras"
+    },
+    "card3": {
+      "title": "Templo de Santo Domingo",
+      "description": "Visita el templo histórico",
+      "category": "historia"
+    },
+    "card4": {
+      "title": "Gastronomía local",
+      "description": "Prueba los moles típicos",
+      "category": "gastronomía"
+    },
+    "card5": {
+      "title": "Monte Albán",
+      "description": "Zona arqueológica",
+      "category": "arqueología"
+    }
+  },
+  "recommendations": {
+    "title": "Los lugares que te recomendamos",
+    "valle": {
+      "title": "Valle de Bravo",
+      "cards": {
+        "v1": {
+          "title": "Cascada Velo de Novia",
+          "category": "Naturaleza"
+        },
+        "v2": {
+          "title": "Restaurante Los Pericos",
+          "category": "Gastronomía"
+        },
+        "v3": {
+          "title": "Mirador La Peña",
+          "category": "Naturaleza"
+        }
+      }
+    },
+    "toluca": {
+      "title": "Toluca",
+      "cards": {
+        "t1": {
+          "title": "Casa Azul",
+          "category": "Cultura"
+        },
+        "t2": {
+          "title": "Iglesia del Carmen",
+          "category": "Cultura"
+        },
+        "t3": {
+          "title": "El Cosmovitral",
+          "category": "Naturaleza"
+        },
+        "t4": {
+          "title": "El Norteño",
+          "category": "Gastronomía"
+        }
+      }
+    },
+    "teotihuacan": {
+      "title": "San Juan Teotihuacán",
+      "cards": {
+        "sj1": {
+          "title": "Teotihuacán",
+          "category": "Cultura"
+        },
+        "sj2": {
+          "title": "Restaurante Mictlán",
+          "category": "Gastronomía"
+        }
+      }
+    }
+  }
+}
